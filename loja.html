@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #003366; /* Azul escuro */
+        }
+        img {
+            max-width: 35%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .description {
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+        .price {
+            font-size: 24px;
+            color: #003366; /* Azul escuro */
+            margin: 20px 0;
+        }
+        .buy-button {
+            background-color: #003366; /* Azul escuro */
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+        .buy-button:hover {
+            background-color: #00509e; /* Azul mais claro */
+        }
+        .disabled {
+            background-color: #ccc; /* Cor cinza para botão desativado */
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Display inovador</h1>
+    <img src="./assets/produto1.jpg" alt="Produto Deaf Silence">
+    <div class="description">
+        <p>Experimente o nosso display inovador que aumenta a segurança e a autonomia de pessoas com deficiência auditiva no trânsito. Compacto, eficiente e fácil de usar, ele é a solução perfeita para uma mobilidade mais inclusiva.</p>
+    </div>
+    <div class="price">
+        R$ 000,00
+    </div>
+    <a href="./carrinho.html">
+        <button class="buy-button" id="addToCartButton">Adicionar ao Carrinho</button>
+    </a>
+    
+</div>
+
+</body>
+</html>

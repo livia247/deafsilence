@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f4f8;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h2 {
+            color: #003366; /* Azul escuro */
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            background-color: #e5f0ff; /* Azul claro */
+        }
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #003366; /* Azul escuro */
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #003366; /* Azul escuro */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #002244; /* Azul mais escuro */
+        }
+        .star-rating {
+            display: inline-block;
+            direction: rtl;
+        }
+        .star-rating input {
+            display: none;
+        }
+        .star-rating label {
+            font-size: 30px;
+            color: #ddd;
+            cursor: pointer;
+        }
+        .star-rating input:checked ~ label {
+            color: #f39c12;
+        }
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #f39c12;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Meu Perfil</h2>
+
+    <div class="section">
+        <div class="section-title">Cupom</div>
+        <p>Você tem um cupom de desconto de <strong><span id="cupom-valor">10%</span></strong> na sua próxima compra!</p>
+        <button class="button" onclick="usarCupom()" aria-label="Usar cupom">Resgatar Cupom</button>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Pontos</div>
+        <p>Você tem <strong><span id="pontos-valor">120</span></strong> pontos acumulados.</p>
+        <button class="button" onclick="realizarCompra()" aria-label="Realizar compra">Realizar Compra</button>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Status dos Pedidos</div>
+        <ul id="status-pedidos">
+            <li>Não Pago: <strong><span id="nao-pago">1</span></strong></li>
+            <li>Processando: <strong><span id="processando">0</span></strong></li>
+            <li>Enviado: <strong><span id="enviado">0</span></strong></li>
+            <li>Devolução: <strong><span id="devolucao">0</span></strong></li>
+        </ul>
+        <button class="button" onclick="atualizarStatus()" aria-label="Atualizar status">Atualizar Status</button>
+        <button class="button" onclick="verPedidos()" aria-label="Ver pedidos">Ver Pedidos</button>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Suporte</div>
+        <p>Precisa de ajuda? Entre em contato com nosso suporte.</p>
+        <button class="button" onclick="contatoSuporte()" aria-label="Contato suporte">Contato Suporte</button>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Sugestões e Reclamações</div>
+        <form id="sugestao-form" onsubmit="enviarSugestao(event)">
+            <textarea id="sugestao-texto" rows="4" placeholder="Digite sua sugestão aqui..." required></textarea>
+            <br><br>
+            <input type="file" id="sugestao-foto" accept="image/*">
+            <br><br>
+            <div class="star-rating">
+                <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+                <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+                <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+                <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+                <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+            </div>
+            <br>
+            <button type="submit" class="button">Enviar Sugestão</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Função para realizar a compra e redirecionar para loja.html
+    function realizarCompra() {
+        const pontosElemento = document.getElementById('pontos-valor');
+        const pontos = parseInt(pontosElemento.innerText);
+        const pontosGanho = 20; // Pontos ganhos por compra
+
+        // Atualiza o status do pedido após a compra
+        document.getElementById('nao-pago').innerText = 0;
+        document.getElementById('processando').innerText = 1;
+
+        // Exibe mensagem de confirmação e ganha pontos
+        alert('Compra realizada! Você ganhou ' + pontosGanho + ' pontos.');
+
+        // Atualiza a quantidade de pontos
+        pontosElemento.innerText = pontos + pontosGanho;
+
+        // Redireciona para a página loja.html
+        window.location.href = './loja.html';
+    }
+
+    // Função para usar o cupom
+    function usarCupom() {
+        const cupom = document.getElementById('cupom-valor').innerText;
+        alert('Você usou o cupom de desconto de ' + cupom + ' na sua próxima compra!');
+    }
+
+    // Função para visualizar pontos
+    function verMeusPontos() {
+        const pontos = document.getElementById('pontos-valor').innerText;
+        alert('Você tem ' + pontos + ' pontos acumulados.');
+    }
+
+    // Função para simular a atualização do status dos pedidos
+    function atualizarStatus() {
+        const processando = document.getElementById('processando');
+        const enviado = document.getElementById('enviado');
+
+        // Atualiza o status: Processando -> Enviado
+        if (parseInt(processando.innerText) > 0) {
+            processando.innerText = 0;
+            enviado.innerText = 1;
+            alert('Seu pedido foi enviado!');
+        } else {
+            alert('Não há pedidos em processamento para atualizar.');
+        }
+    }
+
+    // Função para visualizar pedidos
+    function verPedidos() {
+        const naoPago = document.getElementById('nao-pago').innerText;
+        const processando = document.getElementById('processando').innerText;
+        const enviado = document.getElementById('enviado').innerText;
+        const devolucao = document.getElementById('devolucao').innerText;
+
+        alert('Status dos seus pedidos:\n' +
+              'Não Pago: ' + naoPago + '\n' +
+              'Processando: ' + processando + '\n' +
+              'Enviado: ' + enviado + '\n' +
+              'Devolução: ' + devolucao);
+    }
+
+    // Função para contato com suporte
+    function contatoSuporte() {
+        alert('Para entrar em contato com o suporte, envie um e-mail para suporte@exemplo.com.');
+    }
+
+    // Função para enviar sugestão
+    function enviarSugestao(event) {
+        event.preventDefault(); // Impede o envio padrão do formulário
+
+        const texto = document.getElementById('sugestao-texto').value;
+        const foto = document.getElementById('sugestao-foto').files[0];
+        const rating = document.querySelector('input[name="rating"]:checked');
+
+        let ratingValor = rating ? rating.value : 'Nenhuma avaliação';
+
+        let mensagem = 'Sugestão enviada com sucesso!\n' +
+                       'Texto: ' + texto + '\n' +
+                       'Foto: ' + (foto ? foto.name : 'Nenhuma foto enviada') + '\n' +
+                       'Avaliação: ' + ratingValor + ' estrelas';
+
+        alert(mensagem);
+        
+        // Limpar o formulário
+        document.getElementById('sugestao-form').reset();
+    }
+</script>
+
+</body>
+</html>

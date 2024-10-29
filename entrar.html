@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #003366;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        input {
+            width: 95%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #002147; /* Azul escuro */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #004080; /* Tom mais claro de azul */
+        }
+        .link {
+            margin-top: 10px;
+            display: block;
+            color: #002147;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Entrar</h2>
+    <input type="email" id="email" placeholder="E-mail" required>
+    <input type="password" id="senha" placeholder="Senha" required>
+    <button onclick="entrar()">Entrar</button>
+    <a href="#" class="link">Esqueceu a senha?</a>
+    <p>Ainda não tem uma conta? <a href="cadastro.html" class="link">Cadastre-se</a></p>
+</div>
+
+<script>
+    function entrar() {
+        const email = document.getElementById('email').value;
+        const senha = document.getElementById('senha').value;
+        const usuario = JSON.parse(localStorage.getItem(email));
+
+        if (usuario && usuario.senha === senha) {
+            alert("Login bem-sucedido!");
+            // Redirecionar para a página de perfil
+            window.location.href = "perfil.html";
+        } else {
+            alert("E-mail ou senha incorretos.");
+        }
+    }
+</script>
+
+</body>
+</html>
